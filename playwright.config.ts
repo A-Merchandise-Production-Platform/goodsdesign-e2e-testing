@@ -39,7 +39,18 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { 
+        ...devices['Desktop Chrome'],
+        launchOptions: {
+          args: [
+            '--enable-gpu',
+            '--enable-unsafe-swiftshader',
+            '--enable-webgl',
+            '--enable-webgl2',
+            '--ignore-gpu-blocklist'
+          ]
+        }
+      },
     },
 
     // {
