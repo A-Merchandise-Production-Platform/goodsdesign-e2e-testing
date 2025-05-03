@@ -106,8 +106,6 @@ test.describe('Main Flow', () => {
 
     await page.waitForURL('**/product/tshirt/*');
 
-    await new Promise(resolve => setTimeout(resolve, 5000));
-
     await page.waitForSelector('button:has-text("Uploads")', { timeout: 10000 });
 
     await page.waitForSelector('button:has-text("Add to cart")', { timeout: 10000 });
@@ -163,6 +161,10 @@ test.describe('Main Flow', () => {
     await page.waitForSelector('#btnContinue', { timeout: 10000 });
     await page.click('#btnContinue');
 
+    // Wait for and handle terms & conditions modal
+    await page.waitForSelector('#btnAgree', { timeout: 10000 });
+    await page.click('#btnAgree');
+
     // Wait for OTP input and fill it
     await page.waitForSelector('#otpvalue', { timeout: 10000 });
     await page.fill('#otpvalue', '123456');
@@ -175,7 +177,7 @@ test.describe('Main Flow', () => {
     await page.waitForTimeout(5000);
 
     // Verify payment success
-    await page.waitForSelector('div:has-text("Thanh toán thành công")', { timeout: 30000 });
+    await page.waitForSelector('div:has-text("Successful")', { timeout: 30000 });
   });
 });
 
